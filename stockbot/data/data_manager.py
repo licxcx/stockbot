@@ -2,7 +2,9 @@
 
 import logging
 
-from spider.jisilu import FundASpider
+from stockbot.spider.jisilu import FundASpider
+from stockbot.util import stockdate
+
 
 class DataManager(object):
 

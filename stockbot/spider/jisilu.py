@@ -6,7 +6,7 @@ import collections
 from datetime import date
 import sqlite3
 
-from spider.common import Spider
+from stockbot.spider.common import Spider
 
 logger = logging.getLogger(__name__)
 
