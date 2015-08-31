@@ -2,7 +2,6 @@
 
 
 from datetime import datetime
-from stockbot.exceptions import InvalidDatetime
 
 
 # 2015年周一到周五中的非交易日（休市）
@@ -22,7 +21,7 @@ def is_trading_date(date_time):
         else:
             return True
     else:
-        raise InvalidDatetime('Date is not instance of datetime, check the type!')
+        raise TypeError('Date is not instance of datetime, check the type!')
 
 
 def is_trading_datetime(date_time):
@@ -45,4 +44,4 @@ def _is_trading_time(date_time):
         else:
             return False
     else:
-        raise InvalidDatetime('Time is not instance of datetime, check the type!')
+        raise TypeError('Time is not instance of datetime, check the type!')

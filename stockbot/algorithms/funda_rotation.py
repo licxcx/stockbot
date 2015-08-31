@@ -41,12 +41,12 @@ class Rotator(object):
         return '{}/{}'.format(str(all.index(reference)), len(all))
 
     def _select_data(self, coupon_descr, orderby='volume'):
-        holder = (coupon_descr, str(date.today()))
+        holder = (coupon_descr, str(date.today()), orderby)
         with sqlite3.connect(self.db) as conn:
             conn.row_factory = sqlite3.Row
             cur = conn.cursor()
             cur.execute('''select * from Afund where coupon_descr = ? and date = ?
-                        order by {} desc '''.format(orderby), holder)
+                        order by ? desc ''', holder)
             return cur.fetchall()
 
     def _write_decision_data(self, coupon_descr, start_col, sheet):
