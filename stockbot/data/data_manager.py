@@ -10,7 +10,7 @@ from stockbot.util import stockdate
 
 class DataManager(object):
     def __init__(self, db="stock.db"):
-        self.fas = FundASpider()
+        self.fas = FundASpider(db)
         self.db = db
 
     def update_funda(self, now):

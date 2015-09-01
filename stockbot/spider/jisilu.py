@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class FundASpider(Spider):
 
-    def __init__(self):
+    def __init__(self, db):
         super(FundASpider, self).__init__()
         self.url = 'http://www.jisilu.cn/data/sfnew/funda_list/?___t={time}'.format(time=str(int(time.time())))
         self.data = {'is_funda_search': '1',
@@ -21,6 +21,7 @@ class FundASpider(Spider):
                     'market[]': ['sh', 'sz'],
                     'coupon_descr[]': ['+4.0%', '+3.0%', '+3.2%', '+3.5%']}
         self.method = 'post'
+        self.db = db
 
     def get_jsl_data(self):
         funda = self.get_response(self.method, self.url, data=self.data).json()
@@ -49,7 +50,7 @@ class FundASpider(Spider):
             yield myfunda
 
     def insert_funda_data(self):
-        with sqlite3.connect("../data/stock.db") as conn:
+        with sqlite3.connect(self.db) as conn:
             conn.text_factory = str
             cur = conn.cursor()
             for myfunda in self.parse_jsl_data():

@@ -15,5 +15,10 @@ class DataManagerTestCase(unittest.TestCase):
         now = datetime.now()
         self.assertEqual(False, self.dm._is_record_exists(now))
 
+    def test_update_all_data(self):
+        now = datetime.now()
+        self.dm.update_funda(now)
+
+
 if __name__ == '__main__':
     unittest.main()
