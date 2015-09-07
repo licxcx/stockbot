@@ -14,12 +14,12 @@ class DataManager(object):
         self.db = db
 
     def update_funda(self, now):
-        if not self._is_record_exists(now):
+        if not self._is_daily_data_exists(now):
             self.fas.insert_funda_data()
         else:
             self.fas.update_funda_data()
 
-    def _is_record_exists(self, date_time):
+    def _is_daily_data_exists(self, date_time):
         with sqlite3.connect(self.db) as conn:
             cur = conn.cursor()
             cur.execute('''select distinct date from Afund where date = ?''',

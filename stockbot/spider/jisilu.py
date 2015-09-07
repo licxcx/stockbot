@@ -60,6 +60,15 @@ class FundASpider(Spider):
                     cur.execute('insert into Afund values( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)', values)
 
     def update_funda_data(self):
-        pass
+        with sqlite3.connect(self.db) as conn:
+            conn.text_factory = str
+            cur = conn.cursor()
+            for myfunda in self.parse_jsl_data():
+                if myfunda['left_year'] == '永续':
+                    sql = ('update Afund set current_price=:current_price, discount_rate=:discount_rate, '
+                           'increase_rate=:increase_rate, revised_profit=:revised_profit, '
+                           'base_premium_rate=:base_premium_rate, volume=:volume '
+                           'where date=:date and code=:code')
+                    cur.execute(sql, myfunda)
 
 

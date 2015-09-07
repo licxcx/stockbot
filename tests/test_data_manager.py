@@ -13,7 +13,7 @@ class DataManagerTestCase(unittest.TestCase):
 
     def test_is_record_exists(self):
         now = datetime.now()
-        self.assertEqual(False, self.dm._is_record_exists(now))
+        self.assertEqual(False, self.dm._is_daily_data_exists(now))
 
     def test_update_all_data(self):
         now = datetime.now()
